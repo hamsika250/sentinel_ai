@@ -1,4 +1,4 @@
-export const API = 'http://127.0.0.1:8000';
+export const API = 'https://sentinel-ai-uaiq.onrender.com';
 
 export async function getJSON(path) {
   const r = await fetch(`${API}${path}`);
