@@ -6,11 +6,26 @@ from detector import VideoAnalyzer
 from sensors import get_sensors
 
 app = FastAPI(title='Sentinel AI API', version='2.0')
-app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_credentials=True, allow_methods=['*'], allow_headers=['*'])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://sentinel-gpvf2f9a3-ignite-99f0.vercel.app",
+        "https://sentinel-ai-git-main-ignite-99f0.vercel.app",
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 UPLOAD_DIR = 'uploads'
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 sessions = {}
-
+@app.get("/")
+def root():
+    return {
+        "status": "online",
+        "system": "Sentinel AI API",
+        "message": "Backend is running"
+    }
 
 @app.get('/api/health')
 def health():
